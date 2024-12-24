@@ -26,8 +26,9 @@ private:
     Customer now_customer;
     pthread_mutex_t* shared_space_lock;
     pthread_mutex_t* oven_lock;
+    pthread_cond_t* oven_cond;
     void sleep_until_bake();
-    int baker_number;
+    int* oven_free_capacity;
 public:
     int id;
     Baker();
@@ -41,8 +42,9 @@ public:
             pthread_mutex_t* shared_space_lock, pthread_mutex_t* oven_lock);
 
     static void* start(void*);
-    void set_baker_number(int baker_number);
+    void set_oven_free_capacity(int* oven_free_capacity);
     void set_id(int id);
+    void set_oven_cond_var(pthread_cond_t*);
 
     
 

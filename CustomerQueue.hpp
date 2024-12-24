@@ -16,7 +16,6 @@ struct Customer
     {
         std::string name;
         int count;
-        int done;
 
     };
 
@@ -28,6 +27,7 @@ private:
 
     std::vector<Customer> customers;
     pthread_mutex_t* oven_lock;
+    bool is_disorder;
     
 
 public:

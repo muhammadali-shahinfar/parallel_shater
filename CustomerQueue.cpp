@@ -5,6 +5,7 @@ CustomerQueue::CustomerQueue(std::string names,std::string counts,pthread_mutex_
     std::istringstream nameStream(names);
     std::vector<std::string> customer_names;
     std::string name;
+    this->is_disorder = false;
     while (nameStream >> name) {
         customer_names.push_back(name);
     }
@@ -19,7 +20,6 @@ CustomerQueue::CustomerQueue(std::string names,std::string counts,pthread_mutex_
         Customer new_customer;
         new_customer.count = customer_orders[i];
         new_customer.name = customer_names[i];
-        new_customer.done = 0;
         this->customers.push_back(new_customer);
     }
     this->oven_lock = oven_lock;
@@ -32,7 +32,13 @@ CustomerQueue::CustomerQueue()
 {
 }
 Customer CustomerQueue::order(){
-    Customer now_customer = this->customers[0];
+    Customer now_customer;
+    if(!this->is_disorder){
+        now_customer = this->customers[0];
+    }
+    else {
+        
+    }
     return now_customer;
 }
 void CustomerQueue::get_bread(){

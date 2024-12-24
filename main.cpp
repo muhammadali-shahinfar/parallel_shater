@@ -17,6 +17,7 @@ int main(){
     pthread_mutex_init(&oven_lock,NULL);
     pthread_mutex_t shared_table_lock;
     pthread_mutex_init(&shared_table_lock,NULL);
+    int oven_free_capacity = baker_number * 10;
     for(int i =0;i < baker_number;i++){
         std::string customer_names, orders;
         std::cout << "Enter customer names: ";
@@ -25,7 +26,7 @@ int main(){
         std::cout << "Enter orders (space-separated): ";
         getline(std::cin, orders);
         bakers[i].get_inputs(customer_names,orders,&shared_table_lock,&oven_lock);
-        bakers[i].set_baker_number(baker_number);
+        bakers[i].set_oven_free_capacity(&oven_free_capacity);
         bakers[i].set_id(i + 1);
 
     }
